@@ -1,7 +1,7 @@
 The software is licensed under MIT license
 
 Copyright 2023, Copyright Owner: Karlsruhe Institute of Technology (KIT)  
-Author: Marcel Wessbecher
+Author: Marcel Wessbecher  
 Contact: marcel.wessbecher@kit.edu, Institute for Automation and Applied Informatics  
 
 ---
