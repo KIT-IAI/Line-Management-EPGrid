@@ -1,19 +1,19 @@
 #include "SolverGradient.h"
-#include "../../model/gridElements/CurrentController.h"
+#include "../../model/gridElements/CurrentSource.h"
 #include "../../math/VectorTools.h"
 #include "../../Config.h"
 
 
 /** Constructor.
-* @param model the DataModel of the grid.**/
-SolverGradient::SolverGradient(DataModel* model) :Solver(model)
+* @param model the GridModel of the grid.**/
+SolverGradient::SolverGradient(GridModel* model) :Solver(model)
 {
 }
 
 /** Constructor.
-* @param model the DataModel of the grid.
+* @param model the GridModel of the grid.
 * @param logger the SolverLogging object for logging.**/
-SolverGradient::SolverGradient(DataModel* model, SolverLogging* logger) : Solver(model, logger)
+SolverGradient::SolverGradient(GridModel* model, SolverLogging* logger) : Solver(model, logger)
 {
 }
 

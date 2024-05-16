@@ -33,14 +33,14 @@ std::vector<Line*> Node::getLines()
 }
 /** Returns a string containing all static data of the Node.
 * @return String containing all static data.**/
-std::string Node::serializeStatic()
+std::string Node::serialize()
 {
 	return id;
 }
 /** Returns a string containing dynamic data of the Node at a given timeslot.
 * @param timeslot the timeslot to be considered
 * @return String of dynamic data.**/
-std::string Node::serializeDynamic(int timeslot)
+std::string Node::serializeState(int timeslot)
 {
 	std::ostringstream streamObj;
 	streamObj << std::fixed;

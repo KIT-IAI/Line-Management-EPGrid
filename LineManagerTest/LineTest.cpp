@@ -2,8 +2,8 @@
 #include "CppUnitTest.h"
 
 #include<model/gridElements/Line.h>
-#include <model/gridElements/CurrentController.h>
-#include <model/gridElements/VoltageController.h>
+#include <model/gridElements/CurrentSource.h>
+#include <model/gridElements/VoltageSource.h>
 #include <model/gridElements/Coupler.h>
 
 
@@ -17,12 +17,12 @@ namespace LineTest
 	public:
 		Node* c0 = new Coupler("0");
 		Node* c1 = new Coupler("1");
-		Node* vc = new VoltageController("2", 230);
-		Node* cc = new CurrentController("3");
+		Node* vc = new VoltageSource("2", 230);
+		Node* cc = new CurrentSource("3");
 		TEST_METHOD(LineSerializationStatic)
 		{
 			Line* l = new Line(c0, c1, 1000);
-			std::string res = l->serializeStatic();
+			std::string res = l->serialize();
 			std::string exp = "0,1,0.20600,275";
 			Assert::AreEqual(exp, res);
 		}

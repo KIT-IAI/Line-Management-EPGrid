@@ -1,5 +1,5 @@
 #pragma once
-#include "../../model/DataModel.h"
+#include "../../model/GridModel.h"
 #include "SolverLogging.h"
 #include "../../math/LSSolver.h"
 
@@ -7,8 +7,8 @@
 class Solver
 {
 public:
-	Solver(DataModel* model);
-	Solver(DataModel* model, SolverLogging* logger);
+	Solver(GridModel* model);
+	Solver(GridModel* model, SolverLogging* logger);
 	~Solver();
 	/** Calculates the grid voltages based on set points of current and power
 	* @param currents a vector of current set points.
@@ -20,7 +20,7 @@ public:
 * @return The type of the solver as string.**/
 	virtual std::string getType() = 0;
 protected:
-	DataModel* model;
+	GridModel* model;
 	SolverLogging* logger;
 	LSSolver* lss = new LSSolver();
 

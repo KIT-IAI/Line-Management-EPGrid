@@ -7,8 +7,8 @@ class SolverSpice : public Solver
 {
 	//TODO this solver creates a LSSolver instance because of extending Solver which is not needed
 public:
-	SolverSpice(DataModel* model);
-	SolverSpice(DataModel* model, SolverLogging* logger);
+	SolverSpice(GridModel* model);
+	SolverSpice(GridModel* model, SolverLogging* logger);
 	~SolverSpice();
 	std::vector<double> calculateVoltages(std::vector<double> currents, std::vector<double> powers, std::vector<double> operatingPoint);
 	std::string getType();

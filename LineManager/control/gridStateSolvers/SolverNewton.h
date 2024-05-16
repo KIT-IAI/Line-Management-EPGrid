@@ -5,8 +5,8 @@
 class SolverNewton : public Solver
 {
 public:
-	SolverNewton(DataModel* model);
-	SolverNewton(DataModel* model, SolverLogging* logger);
+	SolverNewton(GridModel* model);
+	SolverNewton(GridModel* model, SolverLogging* logger);
 	std::vector<double> calculateVoltages(std::vector<double> currents, std::vector<double> powers, std::vector<double> operatingPoint);
 	std::string getType();
 private:

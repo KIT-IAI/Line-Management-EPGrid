@@ -2,15 +2,15 @@
 #include "../../math/VectorTools.h"
 
 /** Constructor.
-* @param model the DataModel of the grid.**/
-SolverSpice::SolverSpice(DataModel* model) :Solver(model)
+* @param model the GridModel of the grid.**/
+SolverSpice::SolverSpice(GridModel* model) :Solver(model)
 {
 	spice = new SpiceWrapper();
 }
 /** Constructor.
-* @param model the DataModel of the grid.
+* @param model the GridModel of the grid.
 * @param logger the SolverLogging object for logging.**/
-SolverSpice::SolverSpice(DataModel* model, SolverLogging* logger) : Solver(model, logger)
+SolverSpice::SolverSpice(GridModel* model, SolverLogging* logger) : Solver(model, logger)
 {
 	spice = new SpiceWrapper();
 

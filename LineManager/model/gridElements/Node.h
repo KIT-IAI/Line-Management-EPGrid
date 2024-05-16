@@ -16,8 +16,8 @@ public:
 	virtual Types getType() = 0;
 	void addLine(Line* l);
 	std::vector<Line*> getLines();
-	virtual std::string serializeStatic();
-	virtual std::string serializeDynamic(int timeslot);
+	virtual std::string serialize();
+	virtual std::string serializeState(int timeslot);
 	double getVoltage(int timeslot);
 	void setVoltage(double voltage, int timeslot, bool force);
 	double getCurrent(int timeslot);

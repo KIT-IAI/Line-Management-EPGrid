@@ -6,8 +6,8 @@
 class SolverNodal : public Solver
 {
 public:
-	SolverNodal(DataModel* model);
-	SolverNodal(DataModel* model, SolverLogging* logger);
+	SolverNodal(GridModel* model);
+	SolverNodal(GridModel* model, SolverLogging* logger);
 	std::vector<double> calculateVoltages(std::vector<double> currents, std::vector<double> powers, std::vector<double> operatingPoint);
 	std::string getType();
 private:

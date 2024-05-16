@@ -7,6 +7,6 @@ class Coupler : public Node
 public:
 	Coupler(std::string id);
 	Types getType();
-	std::string serializeStatic();
+	std::string serialize();
 private:
 };

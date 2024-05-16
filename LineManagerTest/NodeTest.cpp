@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 
-#include <model/gridElements/CurrentController.h>
-#include <model/gridElements/VoltageController.h>
+#include <model/gridElements/CurrentSource.h>
+#include <model/gridElements/VoltageSource.h>
 #include <model/gridElements/Coupler.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -23,31 +23,33 @@ namespace NodeTest
 				Assert::Fail();
 			}
 		}
-		TEST_METHOD(NodeSerializationStatic)
+		TEST_METHOD(NodeSerialization1)
 		{
-			Node* n = new CurrentController("0");
-			std::string res = n->serializeStatic();
+			Node* n = new CurrentSource("0");
+		
+			std::string res = n->serialize();
+			std::cout << res << std::endl;
 			std::string exp = "0,CC";
 			Assert::AreEqual(exp, res);
 		}
-		TEST_METHOD(NodeSerializationStatic1)
+		TEST_METHOD(NodeSerialization2)
 		{
 			Node* n = new Coupler("0");
-			std::string res = n->serializeStatic();
+			std::string res = n->serialize();
 			std::string exp = "0,C";
 			Assert::AreEqual(exp, res);
 		}
-		TEST_METHOD(NodeSerializationStatic2)
+		TEST_METHOD(NodeSerialization3)
 		{
-			Node* n = new VoltageController("0", 230);
-			std::string res = n->serializeStatic();
+			Node* n = new VoltageSource("0", 230);
+			std::string res = n->serialize();
 			std::string exp = "0,VC";
 			Assert::AreEqual(exp, res);
 		}
 
 		TEST_METHOD(NodeSetVoltages)
 		{
-			Node* v = new VoltageController("0", 230);
+			Node* v = new VoltageSource("0", 230);
 			v->setVoltage(1, 5, false);
 			v->setVoltage(5, 10, false);
 			v->setVoltage(-5, 7, false);
@@ -64,7 +66,7 @@ namespace NodeTest
 
 		TEST_METHOD(NodeGetVoltage)
 		{
-			Node* v = new VoltageController("0", 230);
+			Node* v = new VoltageSource("0", 230);
 			v->setVoltage(1, 5, false);
 			v->setVoltage(5, 10, false);
 			v->setVoltage(-5, 15, false);
@@ -75,7 +77,7 @@ namespace NodeTest
 		}
 		TEST_METHOD(CCAddSetpoint)
 		{
-			CurrentController* cc = new CurrentController("0");
+			CurrentSource* cc = new CurrentSource("0");
 			cc->addPowerSetpoint(200, 1, 4);
 			Assert::AreEqual((double)0, cc->getPowerSetpoint(0));
 			Assert::AreEqual((double)200, cc->getPowerSetpoint(1));
@@ -86,7 +88,7 @@ namespace NodeTest
 		}
 		TEST_METHOD(CCAddSetpointOneSideOverlap)
 		{
-			CurrentController* cc = new CurrentController("0");
+			CurrentSource* cc = new CurrentSource("0");
 			cc->addPowerSetpoint(200, 1, 3);
 			cc->addPowerSetpoint(200, 3, 3);
 			Assert::AreEqual((double)0, cc->getPowerSetpoint(0));
@@ -98,7 +100,7 @@ namespace NodeTest
 		}
 		TEST_METHOD(CCAddSetpointCompleteOverlap)
 		{
-			CurrentController* cc = new CurrentController("0");
+			CurrentSource* cc = new CurrentSource("0");
 			cc->addPowerSetpoint(200, 1, 6);
 			cc->addPowerSetpoint(200, 3, 2);
 			Assert::AreEqual((double)0, cc->getPowerSetpoint(0));
@@ -110,8 +112,8 @@ namespace NodeTest
 
 		TEST_METHOD(CCRemoveSetpoint1)
 		{
-			CurrentController* cc1 = new CurrentController("0");
-			CurrentController* cc2 = new CurrentController("0");
+			CurrentSource* cc1 = new CurrentSource("0");
+			CurrentSource* cc2 = new CurrentSource("0");
 			cc1->addPowerSetpoint(200, 1, 6);
 			cc1->removePowerSetpoint(200, 1, 6);
 			sameSetpointsCheck(cc1->getPowerSetpoints(), cc2->getPowerSetpoints());
@@ -119,8 +121,8 @@ namespace NodeTest
 
 		TEST_METHOD(CCRemoveSetpoint2)
 		{
-		CurrentController* cc1 = new CurrentController("0");
-			CurrentController* cc2 = new CurrentController("0");
+		CurrentSource* cc1 = new CurrentSource("0");
+			CurrentSource* cc2 = new CurrentSource("0");
 			cc1->addPowerSetpoint(200, 1, 3);
 			cc1->addPowerSetpoint(200, 3, 3);
 			cc2->addPowerSetpoint(200, 1, 3);
@@ -130,8 +132,8 @@ namespace NodeTest
 		}
 		TEST_METHOD(CCRemoveSetpoint3)
 		{
-			CurrentController* cc1 = new CurrentController("0");
-			CurrentController* cc2 = new CurrentController("0");
+			CurrentSource* cc1 = new CurrentSource("0");
+			CurrentSource* cc2 = new CurrentSource("0");
 			cc1->addPowerSetpoint(200, 1, 6);
 			cc1->addPowerSetpoint(200, 3, 2);
 			cc2->addPowerSetpoint(200, 1, 6);
@@ -140,8 +142,8 @@ namespace NodeTest
 		}
 		TEST_METHOD(CCRemoveSetpoint4)
 		{
-			CurrentController* cc1 = new CurrentController("0");
-			CurrentController* cc2 = new CurrentController("0");
+			CurrentSource* cc1 = new CurrentSource("0");
+			CurrentSource* cc2 = new CurrentSource("0");
 			cc1->addPowerSetpoint(200, 1, 6);
 			cc1->addPowerSetpoint(200, 3, 2);
 			cc2->addPowerSetpoint(200, 3, 2);

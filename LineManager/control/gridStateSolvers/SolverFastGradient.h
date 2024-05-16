@@ -5,8 +5,8 @@
 class SolverFastGradient : public Solver
 {
 public:
-	SolverFastGradient(DataModel* model);
-	SolverFastGradient(DataModel* model, SolverLogging* logger);
+	SolverFastGradient(GridModel* model);
+	SolverFastGradient(GridModel* model, SolverLogging* logger);
 	~SolverFastGradient();
 	std::vector<double> calculateVoltages(std::vector<double> currents, std::vector<double> powers, std::vector<double> operatingPoint);
 	std::string getType();

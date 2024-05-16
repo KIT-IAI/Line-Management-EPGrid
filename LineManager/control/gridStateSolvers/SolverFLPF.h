@@ -6,8 +6,8 @@
 class SolverFLPF : public Solver
 {
 public:
-	SolverFLPF(DataModel* model);
-	SolverFLPF(DataModel* model, SolverLogging* logger);
+	SolverFLPF(GridModel* model);
+	SolverFLPF(GridModel* model, SolverLogging* logger);
 	std::vector<double> calculateVoltages(std::vector<double> currents, std::vector<double> powers, std::vector<double> operatingPoint);
 	std::string getType();
 private:

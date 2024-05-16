@@ -1,5 +1,5 @@
 #include "SolverFLPF.h"
-#include "../../model/gridElements/CurrentController.h"
+#include "../../model/gridElements/CurrentSource.h"
 #include "../../math/VectorTools.h"
 #include "../../math/Matrix.h"
 #include "../../math/LSSolver.h"
@@ -7,14 +7,14 @@
 
 
 /** Constructor.
-* @param model the DataModel of the grid.**/
-SolverFLPF::SolverFLPF(DataModel* model) :Solver(model)
+* @param model the GridModel of the grid.**/
+SolverFLPF::SolverFLPF(GridModel* model) :Solver(model)
 {
 }
 /** Constructor.
-* @param model the DataModel of the grid.
+* @param model the GridModel of the grid.
 * @param logger the SolverLogging object for logging.**/
-SolverFLPF::SolverFLPF(DataModel* model, SolverLogging* logger) : Solver(model, logger)
+SolverFLPF::SolverFLPF(GridModel* model, SolverLogging* logger) : Solver(model, logger)
 {
 }
 /** Overriden method from Solver::calculateVoltages() **/

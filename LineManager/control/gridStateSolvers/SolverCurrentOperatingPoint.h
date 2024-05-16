@@ -5,8 +5,8 @@
 class SolverCurrentOperatingPoint : public Solver
 {
 public:
-	SolverCurrentOperatingPoint(DataModel* model);
-	SolverCurrentOperatingPoint(DataModel* model, SolverLogging* logger);
+	SolverCurrentOperatingPoint(GridModel* model);
+	SolverCurrentOperatingPoint(GridModel* model, SolverLogging* logger);
 	std::vector<double> calculateVoltages(std::vector<double> currents, std::vector<double> powers, std::vector<double> operatingPoint);
 	std::string getType();
 private:

@@ -86,8 +86,7 @@ void VisualizerCurve::visualize(bool scatter, bool hold, bool logscale)
 	std::string logscaleString = logscale ? "True" : "False";
 	PyObject* pValue = PyObject_CallMethod(pInstance, "renderCurves", "(s,s,s,s,s,s,s,s,s)", xValues.c_str(), yValues.c_str(), scatterString.c_str(), holdString.c_str(), logscaleString.c_str(), curveNames.c_str(), title.c_str(), xAxesLabel.c_str(), yAxesLabel.c_str());
 	callerString = "renderCurves\n\n" + xValues + "\n\n" + yValues + "\n\n" + scatterString + "\n\n" + holdString + "\n\n" + logscaleString + "\n\n" + curveNames + "\n\n" + title + "\n\n" + xAxesLabel + "\n\n" + yAxesLabel;
-
-	Visualizer::visualize();
+		Visualizer::visualize();
 	clearCurves();
 }
 

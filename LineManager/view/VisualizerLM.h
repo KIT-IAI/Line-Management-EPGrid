@@ -22,7 +22,7 @@ public:
 	void showVoltages(std::list<std::pair<std::string, std::string>> lines);
 	void showPowerLoss();
 private:
-	DataModel* model;
+	GridModel* model;
 	VisualizerCurve* vc;
 	VisualizerGrid* vg;
 	void showDynamic(int nodePropertyIndex, int linePropertyIndex, std::set<int> times, bool ignoreEndStates);

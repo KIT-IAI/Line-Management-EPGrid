@@ -22,8 +22,8 @@ public:
 	double getCurrent(int timeslot);
 	double getCurrentRelative(int timeslot, Node* v);
 	double getPower(int timeslot);
-	std::string serializeStatic();
-	std::string serializeDynamic(int timeslot);
+	std::string serialize();
+	std::string serializeState(int timeslot);
 	Node* getPartnerNode(Node* v);
 
 	friend std::ostream& operator<<(std::ostream& os, const Line& l);

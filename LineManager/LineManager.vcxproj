@@ -149,10 +149,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="control\gridStateSolvers\SpiceWrapper.cpp" />
-    <ClCompile Include="control\JobQueue.cpp" />
+    <ClCompile Include="control\SimulationController.cpp" />
     <ClCompile Include="control\LineManager.cpp" />
     <ClCompile Include="control\LineManagerBenchmark.cpp" />
-    <ClCompile Include="control\LineManagerHelper.cpp" />
+    <ClCompile Include="control\EPGenerator.cpp" />
     <ClCompile Include="control\gridStateSolvers\Solver.cpp" />
     <ClCompile Include="control\gridStateSolvers\SolverFastGradient.cpp" />
     <ClCompile Include="control\gridStateSolvers\SolverFLPF.cpp" />
@@ -165,13 +165,16 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="math\LSSolver.cpp" />
     <ClCompile Include="math\Matrix.cpp" />
+    <ClCompile Include="math\Randomizer.cpp" />
     <ClCompile Include="math\VectorTools.cpp" />
     <ClCompile Include="model\gridElements\CableTypes.cpp" />
     <ClCompile Include="model\gridElements\Coupler.cpp" />
-    <ClCompile Include="model\gridElements\CurrentController.cpp" />
+    <ClCompile Include="model\gridElements\CurrentSource.cpp" />
     <ClCompile Include="model\gridElements\Line.cpp" />
     <ClCompile Include="model\gridElements\Node.cpp" />
-    <ClCompile Include="model\gridElements\VoltageController.cpp" />
+    <ClCompile Include="model\gridElements\VoltageSource.cpp" />
+    <ClCompile Include="model\GridModelGenerator.cpp" />
+    <ClCompile Include="model\GridModelHelper.cpp" />
     <ClCompile Include="model\packets\EP.cpp" />
     <ClCompile Include="model\packets\EPCurrentRectangular.cpp" />
     <ClCompile Include="model\packets\EPCurrentTrapeze.cpp" />
@@ -179,7 +182,7 @@
     <ClCompile Include="model\packets\EPPowerTrapeze.cpp" />
     <ClCompile Include="model\packets\Setpoint.cpp" />
     <ClCompile Include="model\parser\CSVReader.cpp" />
-    <ClCompile Include="model\DataModel.cpp" />
+    <ClCompile Include="model\GridModel.cpp" />
     <ClCompile Include="model\parser\SimBenchParser.cpp" />
     <ClCompile Include="view\Visualizer.cpp" />
     <ClCompile Include="view\VisualizerCurve.cpp" />
@@ -189,10 +192,10 @@
   <ItemGroup>
     <ClInclude Include="Config.h" />
     <ClInclude Include="control\gridStateSolvers\SpiceWrapper.h" />
-    <ClInclude Include="control\JobQueue.h" />
+    <ClInclude Include="control\SimulationController.h" />
     <ClInclude Include="control\LineManager.h" />
     <ClInclude Include="control\LineManagerBenchmark.h" />
-    <ClInclude Include="control\LineManagerHelper.h" />
+    <ClInclude Include="control\EPGenerator.h" />
     <ClInclude Include="control\gridStateSolvers\Solver.h" />
     <ClInclude Include="control\gridStateSolvers\SolverFastGradient.h" />
     <ClInclude Include="control\gridStateSolvers\SolverFLPF.h" />
@@ -204,13 +207,16 @@
     <ClInclude Include="control\gridStateSolvers\SolverCurrentOperatingPoint.h" />
     <ClInclude Include="math\LSSolver.h" />
     <ClInclude Include="math\Matrix.h" />
+    <ClInclude Include="math\Randomizer.h" />
     <ClInclude Include="math\VectorTools.h" />
     <ClInclude Include="model\gridElements\CableTypes.h" />
     <ClInclude Include="model\gridElements\Coupler.h" />
-    <ClInclude Include="model\gridElements\CurrentController.h" />
+    <ClInclude Include="model\gridElements\CurrentSource.h" />
     <ClInclude Include="model\gridElements\Line.h" />
     <ClInclude Include="model\gridElements\Node.h" />
-    <ClInclude Include="model\gridElements\VoltageController.h" />
+    <ClInclude Include="model\gridElements\VoltageSource.h" />
+    <ClInclude Include="model\GridModelGenerator.h" />
+    <ClInclude Include="model\GridModelHelper.h" />
     <ClInclude Include="model\packets\EP.h" />
     <ClInclude Include="model\packets\EPCurrentTrapeze.h" />
     <ClInclude Include="model\packets\EPPowerRectangular.h" />
@@ -218,7 +224,7 @@
     <ClInclude Include="model\packets\EPCurrentRectangular.h" />
     <ClInclude Include="model\packets\Setpoint.h" />
     <ClInclude Include="model\parser\CSVReader.h" />
-    <ClInclude Include="model\DataModel.h" />
+    <ClInclude Include="model\GridModel.h" />
     <ClInclude Include="model\parser\SimBenchParser.h" />
     <ClInclude Include="view\Visualizer.h" />
     <ClInclude Include="view\VisualizerCurve.h" />

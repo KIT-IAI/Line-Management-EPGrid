@@ -12,7 +12,7 @@ Node::Types Coupler::getType()
 }
 /** Returns a string containing all static data of the coupler.
 * @return String containing all static data.**/
-std::string Coupler::serializeStatic()
+std::string Coupler::serialize()
 {
-	return 	Node::serializeStatic() + "," + "C";
+	return 	Node::serialize() + "," + "C";
 }

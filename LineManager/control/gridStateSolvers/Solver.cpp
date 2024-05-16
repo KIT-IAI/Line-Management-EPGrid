@@ -1,17 +1,17 @@
 #include "Solver.h"
 #include "../../Config.h"
 /** Constructor.
-* @param model the DataModel of the grid.**/
-Solver::Solver(DataModel* model)
+* @param model the GridModel of the grid.**/
+Solver::Solver(GridModel* model)
 {
 	this->model = model;
 	logger = nullptr;
 	lss = new LSSolver();
 }
 /** Constructor.
-* @param model the DataModel of the grid.
+* @param model the GridModel of the grid.
 * @param logger the SolverLogging object for logging.**/
-Solver::Solver(DataModel* model, SolverLogging* logger)
+Solver::Solver(GridModel* model, SolverLogging* logger)
 {
 	this->model = model;
 	this->logger = logger;

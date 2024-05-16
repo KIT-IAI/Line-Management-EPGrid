@@ -21,7 +21,7 @@
     <ClCompile Include="control\LineManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="model\DataModel.cpp">
+    <ClCompile Include="model\GridModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="view\Visualizer.cpp">
@@ -51,7 +51,7 @@
     <ClCompile Include="control\gridStateSolvers\SolverFLPF.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="control\LineManagerHelper.cpp">
+    <ClCompile Include="control\EPGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="view\VisualizerLM.cpp">
@@ -63,7 +63,7 @@
     <ClCompile Include="control\LineManagerBenchmark.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="control\JobQueue.cpp">
+    <ClCompile Include="control\SimulationController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="control\gridStateSolvers\SolverLogging.cpp">
@@ -105,7 +105,7 @@
     <ClCompile Include="model\gridElements\Coupler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="model\gridElements\CurrentController.cpp">
+    <ClCompile Include="model\gridElements\CurrentSource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="model\gridElements\Line.cpp">
@@ -114,7 +114,7 @@
     <ClCompile Include="model\gridElements\Node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="model\gridElements\VoltageController.cpp">
+    <ClCompile Include="model\gridElements\VoltageSource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="view\VisualizerGrid.cpp">
@@ -126,12 +126,21 @@
     <ClCompile Include="model\packets\EPCurrentTrapeze.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="model\GridModelHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\GridModelGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\Randomizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="control\LineManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="model\DataModel.h">
+    <ClInclude Include="model\GridModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="view\Visualizer.h">
@@ -161,7 +170,7 @@
     <ClInclude Include="control\gridStateSolvers\SolverFLPF.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="control\LineManagerHelper.h">
+    <ClInclude Include="control\EPGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Config.h">
@@ -176,7 +185,7 @@
     <ClInclude Include="control\LineManagerBenchmark.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="control\JobQueue.h">
+    <ClInclude Include="control\SimulationController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="control\gridStateSolvers\SolverLogging.h">
@@ -212,7 +221,7 @@
     <ClInclude Include="model\packets\EPPowerTrapeze.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="model\gridElements\VoltageController.h">
+    <ClInclude Include="model\gridElements\VoltageSource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="model\gridElements\CableTypes.h">
@@ -221,7 +230,7 @@
     <ClInclude Include="model\gridElements\Coupler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="model\gridElements\CurrentController.h">
+    <ClInclude Include="model\gridElements\CurrentSource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="model\gridElements\Line.h">
@@ -237,6 +246,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="model\packets\EPCurrentTrapeze.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\GridModelHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\GridModelGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\Randomizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

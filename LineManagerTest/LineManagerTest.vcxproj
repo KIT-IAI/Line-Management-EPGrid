@@ -103,7 +103,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories);$(SolutionDir)\LineManager\$(PlatformTarget)\Debug;%LocalAppData%\Programs\Python\Python310\libs</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);LineManager;VoltageController;CurrentController;Coupler;Line;Node;CableTypes;Visualizer;Matrix;LSSolver;DataModel;Solver;SolverNodal;SolverGradient;SolverNewton;VectorTools;SolverFLPF;LineManagerHelper;LineManagerBenchmark;VisualizerCurve;VisualizerLM;EP;EPPowerRectangular;Setpoint;EPPowerTrapeze;JobQueue;SolverLogging;SolverFastGradient;SolverCurrentOperatingPoint;SpiceWrapper;SolverSpice;VisualizerGrid;EPCurrentTrapeze;EPCurrentRectangular</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);$(SolutionDir)LineManager\$(IntDir)*.obj</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -160,6 +160,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GridModelTest.cpp" />
     <ClCompile Include="LineManagerTest.cpp" />
     <ClCompile Include="LineTest.cpp" />
     <ClCompile Include="MatrixTest.cpp" />

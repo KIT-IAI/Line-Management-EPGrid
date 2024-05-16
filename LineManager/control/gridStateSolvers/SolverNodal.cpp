@@ -1,16 +1,16 @@
 #include "SolverNodal.h"
-#include "../../model/gridElements/CurrentController.h"
+#include "../../model/gridElements/CurrentSource.h"
 #include "../../math/VectorTools.h"
 
 /** Constructor.
-* @param model the DataModel of the grid.**/
-SolverNodal::SolverNodal(DataModel* model) :Solver(model)
+* @param model the GridModel of the grid.**/
+SolverNodal::SolverNodal(GridModel* model) :Solver(model)
 {
 }
 /** Constructor.
-* @param model the DataModel of the grid.
+* @param model the GridModel of the grid.
 * @param logger the SolverLogging object for logging.**/
-SolverNodal::SolverNodal(DataModel* model, SolverLogging* logger) : Solver(model, logger)
+SolverNodal::SolverNodal(GridModel* model, SolverLogging* logger) : Solver(model, logger)
 {
 }
 /** Overriden method from Solver::calculateVoltages() **/

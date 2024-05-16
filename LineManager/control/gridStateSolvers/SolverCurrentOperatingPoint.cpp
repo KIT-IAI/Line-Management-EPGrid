@@ -1,19 +1,19 @@
 #include "SolverCurrentOperatingPoint.h"
-#include "../../model/gridElements/CurrentController.h"
+#include "../../model/gridElements/CurrentSource.h"
 #include "../../math/VectorTools.h"
 #include "../../math/LSSolver.h"
 #include "../../Config.h"
 
 
 /** Constructor.
-* @param model the DataModel of the grid.**/
-SolverCurrentOperatingPoint::SolverCurrentOperatingPoint(DataModel* model) :Solver(model)
+* @param model the GridModel of the grid.**/
+SolverCurrentOperatingPoint::SolverCurrentOperatingPoint(GridModel* model) :Solver(model)
 {
 }
 /** Constructor.
-* @param model the DataModel of the grid.
+* @param model the GridModel of the grid.
 * @param logger the SolverLogging object for logging.**/
-SolverCurrentOperatingPoint::SolverCurrentOperatingPoint(DataModel* model, SolverLogging* logger) : Solver(model, logger)
+SolverCurrentOperatingPoint::SolverCurrentOperatingPoint(GridModel* model, SolverLogging* logger) : Solver(model, logger)
 {
 }
 /** Overriden method from Solver::calculateVoltages() **/

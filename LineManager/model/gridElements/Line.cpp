@@ -121,7 +121,7 @@ double Line::getPower(int timeslot)
 }
 /** Returns a string containing static data of the Line.
 * @return String of static data.**/
-std::string Line::serializeStatic()
+std::string Line::serialize()
 {
 	std::ostringstream streamObj;
 	streamObj << std::fixed;
@@ -140,7 +140,7 @@ std::string Line::serializeStatic()
 /** Returns a string containing dynamic data of the Line at a given timeslot.
 * @param timeslot the timeslot to be considered
 * @return String of dynamic data.**/
-std::string Line::serializeDynamic(int timeslot)
+std::string Line::serializeState(int timeslot)
 {
 	std::ostringstream streamObj;
 	streamObj << std::fixed;

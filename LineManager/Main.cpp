@@ -1,7 +1,7 @@
 #include "control/LineManager.h"
 #include "view/VisualizerLM.h"
 #include "view/VisualizerCurve.h"
-#include "control/LineManagerHelper.h"
+#include "control/EPGenerator.h"
 #include "math/LSSolver.h"
 #include "math/VectorTools.h"
 #include "control/LineManagerBenchmark.h"
@@ -10,9 +10,12 @@
 #include "model/packets/EPCurrentRectangular.h"
 #include "model/packets/EPCurrentTrapeze.h"
 #include "Config.h"
+#include "model/GridModelGenerator.h"
 #include "model/parser/SimBenchParser.h"
 LineManager* lm;
 VisualizerLM* vz;
+GridModel* model;
+
 //std::vector<std::string> solverNames = { "Newton","Gradient","FLPF","FGradient","COP","Spice" };1
 //std::vector<std::string> solverNames = { "COP","FLPF","Newton"};
 std::vector<std::string> solverNames = { "Newton","COP","FLPF","Spice" };
@@ -23,8 +26,8 @@ void example1()
 	//Example of voltage boundaries and ability of EP to improve situation
 	//don't overlook rising current at line 2  t=2 as a following of voltage improvement
 	//also see reduced compensation power and current
-	lm = new LineManager("Spice");
-	LineManagerHelper::setupGridNetwork(lm, 8);
+	lm = new LineManager(GridModelGenerator::setupGridNetwork(8), "Spice");
+
 	lm->requestEP(new EPPowerRectangular("6", "2", 14000, 5, 4));
 	lm->requestEP(new EPPowerRectangular("8", "2", 14000, 6, 3));
 	lm->requestEP(new EPPowerRectangular("4", "10", 10000, 7, 2));
@@ -38,8 +41,8 @@ void example1()
 
 void example2()
 {
-	lm = new LineManager("Gradient");
-	LineManagerHelper::setupGridNetwork(lm, 6);
+	lm = new LineManager(GridModelGenerator::setupGridNetwork(6), "Gradient");
+
 	lm->requestEP(new EPPowerRectangular("2", "6", 20000, 4, 10));
 
 	lm->requestEP(new EPPowerRectangular("2", "6", 20000, 20, 10));
@@ -64,8 +67,8 @@ void example2()
 
 void example3()
 {
-	lm = new LineManager("Spice");
-	LineManagerHelper::setupGridNetwork(lm, 6);
+	lm = new LineManager(GridModelGenerator::setupGridNetwork(6), "Spice");
+
 	lm->requestEP(new EPPowerTrapeze("2", "6", 20000, 10000, 4, 50));
 
 	lm->requestEP(new EPPowerTrapeze("2", "6", 20000, 10000, 20, 50));
@@ -94,10 +97,17 @@ void example3()
 void example4()
 {
 	int participants = 20;
-	LineManagerBenchmark* lmb = new LineManagerBenchmark(solverNames);
-	lmb->setupGridNetwork(participants);
-	//lmb->setupPartlyRandomizedNetwork(participants);
-	lmb->generateRequestsPowerRectangular(10, 80, 5, 30000);
+	LineManagerBenchmark* lmb = new LineManagerBenchmark();
+	lmb->addLineManagers(solverNames, &GridModelGenerator::setupGridNetwork, participants);
+	//lmb->addLineManagers(solverNames, &GridModelGenerator::setupPartlyRandomizedNetwork, participants);
+
+	std::vector<EP*> eps;
+	for (int i = 0; i < 10; i++)
+	{
+		eps.push_back(EPGenerator::getRandomPowerRectangular(lmb->getLineManager(0)->getGridModelReference(), 0, 80, 1, 30000, 1, 5));
+	}
+
+	lmb->requestEps(eps);
 	lmb->validateGridStates();
 	lmb->validateDecisions();
 
@@ -106,13 +116,20 @@ void example4()
 	lmb->compareVoltages("4");
 	lmb->compareComputationTimes();
 }
+
 void example5()
 {
 	int participants = 20;
-	LineManagerBenchmark* lmb = new LineManagerBenchmark(solverNames);
-	lmb->setupGridNetwork(participants);
-	//lmb->setupPartlyRandomizedNetwork(participants);
-	lmb->generateRequestsPowerTrapeze(20, 100, 30000, 50000, 50);
+	LineManagerBenchmark* lmb = new LineManagerBenchmark();
+	lmb->addLineManagers(solverNames, &GridModelGenerator::setupGridNetwork, participants);
+	//lmb->addLineManagers(solverNames, &GridModelGenerator::setupPartlyRandomizedNetwork, participants);
+
+	std::vector<EP*> eps;
+	for (int i = 0; i < 20; i++)
+	{
+		eps.push_back(EPGenerator::getRandomPowerTrapeze(lmb->getLineManager(0)->getGridModelReference(), 0, 20, 1, 30000, 5000, 50000, 1, 50));
+	}
+	lmb->requestEps(eps);
 	lmb->validateGridStates();
 	lmb->validateDecisions();
 
@@ -125,25 +142,25 @@ void example5()
 void example6()
 {
 	int participants = 20;
-	LineManagerBenchmark* lmb = new LineManagerBenchmark(solverNames);
+	LineManagerBenchmark* lmb = new LineManagerBenchmark();
+	lmb->addLineManagers(solverNames, &GridModelGenerator::setupGridNetwork, participants);
+	//lmb->addLineManagers(solverNames, &GridModelGenerator::setupPartlyRandomizedNetwork, participants);
 
-	lmb->setupGridNetwork(participants);
+	lmb->requestEp(new EPPowerTrapeze("2", "6", 20000, 10000, 4, 50));
 
-	lmb->requestAll(new EPPowerTrapeze("2", "6", 20000, 10000, 4, 50));
+	lmb->requestEp(new EPPowerTrapeze("2", "6", 20000, 10000, 20, 50));
+	lmb->requestEp(new EPPowerTrapeze("4", "8", 15000, 10000, 25, 10));
 
-	lmb->requestAll(new EPPowerTrapeze("2", "6", 20000, 10000, 20, 50));
-	lmb->requestAll(new EPPowerTrapeze("4", "8", 15000, 10000, 25, 10));
+	lmb->requestEp(new EPPowerTrapeze("2", "6", 20000, 10000, 35, 50));
+	lmb->requestEp(new EPPowerTrapeze("8", "4", 15000, 10000, 40, 10));
 
-	lmb->requestAll(new EPPowerTrapeze("2", "6", 20000, 10000, 35, 50));
-	lmb->requestAll(new EPPowerTrapeze("8", "4", 15000, 10000, 40, 10));
+	lmb->requestEp(new EPPowerTrapeze("4", "8", 10000, 5000, 50, 15));
+	lmb->requestEp(new EPPowerTrapeze("2", "8", 15000, 20000, 55, 15));
 
-	lmb->requestAll(new EPPowerTrapeze("4", "8", 10000, 5000, 50, 15));
-	lmb->requestAll(new EPPowerTrapeze("2", "8", 15000, 20000, 55, 15));
+	lmb->requestEp(new EPPowerTrapeze("4", "8", 10000, 5000, 65, 10));
+	lmb->requestEp(new EPPowerTrapeze("2", "8", 15000, 20000, 70, 10));
 
-	lmb->requestAll(new EPPowerTrapeze("4", "8", 10000, 5000, 65, 10));
-	lmb->requestAll(new EPPowerTrapeze("2", "8", 15000, 20000, 70, 10));
-
-	lmb->requestAll(new EPPowerTrapeze("10", "0", 20000, 50000, 80, 10));
+	lmb->requestEp(new EPPowerTrapeze("10", "0", 20000, 50000, 80, 10));
 	lmb->validateGridStates();
 	lmb->validateDecisions();
 
@@ -156,8 +173,9 @@ void example6()
 
 void example7()
 {
-	lm = new LineManager("COP");
-	LineManagerHelper::setupGridNetwork(lm, 6);
+	model = GridModelGenerator::setupGridNetwork(6);
+	lm = new LineManager(model, "COP");
+
 	lm->requestEP(new EPCurrentTrapeze("2", "6", 70, 100, 4, 10));
 
 	lm->requestEP(new EPCurrentTrapeze("2", "6", 70, 100, 20, 10));
@@ -185,10 +203,16 @@ void example7()
 
 void exampleRealGrid()
 {
-	LineManagerBenchmark* lmb = new LineManagerBenchmark(solverNames);
-	lmb->setupReferenceGrid();
+	LineManagerBenchmark* lmb = new LineManagerBenchmark();
+	lmb->addLineManagers(solverNames, &GridModelGenerator::setupReferenceGrid);
 	//lmb->generateRequestsRectangular(80, 100, 10, 30000);
-	lmb->generateRequestsPowerTrapeze(5, 100, 30000, 10000, 30);
+	std::vector<EP*> eps;
+	for (int i = 0; i < 5; i++)
+	{
+		eps.push_back(EPGenerator::getRandomPowerTrapeze(lmb->getLineManager(0)->getGridModelReference(), 0, 100, 1, 30000, 5000, 10000, 1, 30));
+	}
+	lmb->requestEps(eps);
+
 	lmb->validateGridStates();
 	lmb->validateDecisions();
 
@@ -209,10 +233,17 @@ void exampleRealGrid()
 }
 void exampleRealGrid2()
 {
-	LineManagerBenchmark* lmb = new LineManagerBenchmark(solverNames);
-	lmb->setupReferenceGrid();
+	LineManagerBenchmark* lmb = new LineManagerBenchmark();
+	lmb->addLineManagers(solverNames, &GridModelGenerator::setupReferenceGrid);
 	//lmb->generateRequestsRectangular(80, 100, 10, 30000);
-	lmb->generateRequestsCurrentTrapeze(10, 100, 130, 130, 30);
+	std::vector<EP*> eps;
+	for (int i = 0; i < 10; i++)
+	{
+		eps.push_back(EPGenerator::getRandomCurrentTrapeze(lmb->getLineManager(0)->getGridModelReference(), 0, 100, 1, 130, 5, 130, 1, 30));
+	}
+	lmb->requestEps(eps);
+
+
 	lmb->validateGridStates();
 	lmb->validateDecisions();
 
@@ -233,11 +264,14 @@ void exampleRealGrid2()
 }
 void exampleRealGrid3()
 {
-	LineManagerBenchmark* lmb = new LineManagerBenchmark(solverNames);
-	lmb->setupReferenceGrid();
-	//lmb->generateRequestsRectangular(80, 100, 10, 30000);
-	//lmb->generateRequestsCurrentTrapeze(4, 500, 130, 65, 30);
-	lmb->generateRequestsPowerTrapeze(5, 100, 30000, 10000, 30);
+	LineManagerBenchmark* lmb = new LineManagerBenchmark();
+	lmb->addLineManagers(solverNames, &GridModelGenerator::setupReferenceGrid);
+	std::vector<EP*> eps;
+	for (int i = 0; i < 5; i++)
+	{
+		eps.push_back(EPGenerator::getRandomPowerTrapeze(lmb->getLineManager(0)->getGridModelReference(), 0, 100, 1, 30000, 5000, 10000, 1, 30));
+	}
+	lmb->requestEps(eps);
 	lmb->validateGridStates();
 	lmb->validateDecisions();
 
@@ -259,16 +293,20 @@ void exampleRealGrid3()
 
 void exampleSimBench(std::string name)
 {
-	LineManagerBenchmark* lmb = new LineManagerBenchmark(solverNames);
-	for (int i = 0; i < solverNames.size(); i++)
-	{
-		SimBenchParser::parseModel(lmb->getLineManager(i), "../../LineManager/ReferenceGrids/" + name);
-	}
+
+	LineManagerBenchmark* lmb = new LineManagerBenchmark();
+	lmb->addLineManagers(solverNames, &SimBenchParser::parseModel, "../../LineManager/ReferenceGrids/" + name);
 
 	vz = new VisualizerLM(lmb->getLineManager(0));
 	vz->showStatic(0, 2);
 	//lmb->generateRequestsRectangular(10, 0, 10, 14000);
-	lmb->generateRequestsPowerTrapeze(10, 50, 30000, 50000, 50);
+	std::vector<EP*> eps;
+	for (int i = 0; i < 10; i++)
+	{
+		eps.push_back(EPGenerator::getRandomPowerTrapeze(lmb->getLineManager(0)->getGridModelReference(), 0, 50, 1, 30000, 5000, 50000, 1, 50));
+	}
+	lmb->requestEps(eps);
+
 	lmb->validateGridStates();
 	lmb->validateDecisions();
 
@@ -282,17 +320,12 @@ void exampleSimBench(std::string name)
 
 void evalSimBench(std::vector<std::string> solvers, std::string model, std::vector<EP*> packets)
 {
-	LineManagerBenchmark* lmb = new LineManagerBenchmark(solvers);
-	for (int i = 0; i < solvers.size(); i++)
-	{
-		SimBenchParser::parseModel(lmb->getLineManager(i), "../../LineManager/ReferenceGrids/" + model);
-	}
-	std::string mode = solvers[0].find("_SIM") != std::string::npos ? "Simulation mode" : "Line management mode";
-	for (int i = 0; i < packets.size(); i++)
-	{
-		std::cout << "Request: " << mode << " " << model << " packet " << i + 1 << "/" << packets.size() << std::endl;
-		lmb->requestAll(packets[i]);
-	}
+
+	LineManagerBenchmark* lmb = new LineManagerBenchmark();
+	lmb->addLineManagers(solverNames, &SimBenchParser::parseModel, "../../LineManager/ReferenceGrids/" + model);
+
+	lmb->requestEps(packets);
+
 	lmb->validateGridStates();
 	lmb->validateDecisions();
 
@@ -307,8 +340,8 @@ void evalSimBench(std::vector<std::string> solvers, std::string model, std::vect
 	}
 	lmb->compareComputationTimes();
 
-	vz = new VisualizerLM(lmb->getLineManager(0));
-	vz->showPowersNodes();
+	//vz = new VisualizerLM(lmb->getLineManager(0));
+	//vz->showPowersNodes();
 	delete lmb;
 }
 
@@ -324,8 +357,6 @@ void eval(int packetCount)
 
 	for (std::string modelPath : models)
 	{
-		lm = new LineManager("Spice");
-		SimBenchParser::parseModel(lm, "../../LineManager/ReferenceGrids/" + modelPath);
 		std::vector<EP*> packets;
 		packets.reserve(packetCount);
 		for (int i = 0; i < packetCount; i++)
@@ -333,16 +364,17 @@ void eval(int packetCount)
 			//std::cout << "Generating packet " << i+1 << "/" << packetCount << std::endl;
 			//packets.push_back(LineManagerHelper::getRandomRectangular(lm,100, 50.0, 30000));
 			//packets.push_back(LineManagerHelper::getRandomCurrentTrapeze(lm, 0, 40, 1, 120, 10, 60, 1, 50));
-			packets.push_back(LineManagerHelper::getRandomPowerTrapeze(lm, 0, 60, 1000, 10000, 1000, 10000, 100, 1000));
+			packets.push_back(EPGenerator::getRandomPowerTrapeze(SimBenchParser::parseModel("../../LineManager/ReferenceGrids/" + modelPath), 0, 60, 1000, 10000, 1000, 10000, 100, 1000));
 		}
 		evalSimBench(solverNames, modelPath, packets);
 		evalSimBench(solverNamesSim, modelPath, packets);
 	}
-
 }
-
 int main(void)
 {
+	eval(5);
+	exit(0);
+	//example1();
 	/*std::vector<std::string> solverNames = { "Newton_SIM","COP_SIM","Spice_SIM" };
 	LineManagerBenchmark* lmb = new LineManagerBenchmark(solverNames);
 	for (int i = 0; i < solverNames.size(); i++)
@@ -384,8 +416,8 @@ int main(void)
 	//exampleRealGrid();
 	//exampleRealGrid3();
 	//exit(0);
-	eval(40);
-	exit(0);
+	//eval(40);
+	//exit(0);
 
 	/*example1();
 	example2();
@@ -400,7 +432,7 @@ int main(void)
 	//exampleSimBench("1-LV-semiurb4--0-no_sw");
 	//exampleSimBench("1-LV-semiurb5--0-no_sw");
 	//exampleSimBench("1-LV-urban6--0-no_sw");
-	exit(0);
+	//exit(0);
 
 	/*	int participants = 8;
 		std::vector<std::string> solverNames = { "Newton","Gradient","FLPF","FGradient" };//,"Gradient","FLPF"

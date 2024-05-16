@@ -3,7 +3,7 @@
 
 #include <string>
 #include <iostream>
-#include "../model/gridElements/CurrentController.h"
+#include "../model/gridElements/CurrentSource.h"
 #include "../config.h"
 
 
@@ -28,7 +28,7 @@ VisualizerLM::~VisualizerLM()
 **/
 void VisualizerLM::setLineManager(LineManager* lm)
 {
-	model = lm->getDataModelReference();
+	model = lm->getGridModelReference();
 }
 
 /** Displays the static grid state.
@@ -41,7 +41,7 @@ void VisualizerLM::showStatic(int nodePropertyIndex, int linePropertyIndex)
 		std::cerr << "There are no nodes to visualize" << std::endl;
 		return;
 	}
-	vg->visualizeStatic(model->getNodesStringStatic(), model->getLinesStringStatic(), nodePropertyIndex, linePropertyIndex);
+	vg->visualizeStatic(model->serializeNodes(), model->serializeLines(), nodePropertyIndex, linePropertyIndex);
 }
 
 /** Displays dynamic grid states of given timeslots.
@@ -90,7 +90,7 @@ void VisualizerLM::showDynamic(int nodePropertyIndex, int linePropertyIndex, std
 		timesString += std::to_string(time) + ",";
 	}
 	timesString.pop_back();
-	vg->visualizeDynamic(model->getNodesStringStatic(), model->getNodesStringDynamic(times), model->getLinesStringDynamic(times), model->getLinesStringStatic(), nodePropertyIndex, linePropertyIndex, timesString.c_str());
+	vg->visualizeDynamic(model->serializeNodes(), model->serializeNodeStates(times), model->serializeLines(),model->serializeLineStates(times), nodePropertyIndex, linePropertyIndex, timesString.c_str());
 }
 
 /** Displays the current curve of all specified Node objects.
@@ -203,12 +203,12 @@ std::set<int>  VisualizerLM::ignoreEndStates(std::set<int> times)
 {
 	bool idleBegin = true;
 	bool idleEnd = true;
-	CurrentController* cc;
+	CurrentSource* cc;
 	for (Node* v : model->getNodes())
 	{
 		if (v->getType() == Node::Types::CURRENT_CONTROLLER)
 		{
-			cc = (CurrentController*)v;
+			cc = (CurrentSource*)v;
 			if (cc->getPowerSetpoint(*times.begin()) != 0 || cc->getCurrentSetpoint(*times.begin()) != 0)
 			{
 				idleBegin = false;

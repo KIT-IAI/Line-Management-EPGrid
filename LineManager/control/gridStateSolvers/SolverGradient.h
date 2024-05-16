@@ -6,8 +6,8 @@
 class SolverGradient : public Solver
 {
 public:
-	SolverGradient(DataModel* model);
-	SolverGradient(DataModel* model, SolverLogging* logger);
+	SolverGradient(GridModel* model);
+	SolverGradient(GridModel* model, SolverLogging* logger);
 	virtual std::vector<double> calculateVoltages(std::vector<double> currents, std::vector<double> powers, std::vector<double> operatingPoint);
 	std::string getType();
 private:

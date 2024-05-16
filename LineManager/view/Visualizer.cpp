@@ -3,7 +3,7 @@
 
 #include <string>
 #include <iostream>
-#include "../model/gridElements/CurrentController.h"
+#include "../model/gridElements/CurrentSource.h"
 #include "../Config.h"
 #include <chrono>
 #include <fstream>

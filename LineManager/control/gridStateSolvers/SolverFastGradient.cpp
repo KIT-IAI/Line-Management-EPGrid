@@ -1,19 +1,19 @@
 #include "SolverFastGradient.h"
-#include "../../model/gridElements/CurrentController.h"
+#include "../../model/gridElements/CurrentSource.h"
 #include "../../math/VectorTools.h"
 #include "../../math/LSSolver.h"
 #include "../../Config.h"
 
 
 /** Constructor.
-* @param model the DataModel of the grid.**/
-SolverFastGradient::SolverFastGradient(DataModel* model) :Solver(model)
+* @param model the GridModel of the grid.**/
+SolverFastGradient::SolverFastGradient(GridModel* model) :Solver(model)
 {
 }
 /** Constructor.
-* @param model the DataModel of the grid.
+* @param model the GridModel of the grid.
 * @param logger the SolverLogging object for logging.**/
-SolverFastGradient::SolverFastGradient(DataModel* model, SolverLogging* logger) : Solver(model, logger)
+SolverFastGradient::SolverFastGradient(GridModel* model, SolverLogging* logger) : Solver(model, logger)
 {
 }
 /** Destructor. **/
@@ -116,7 +116,7 @@ std::string SolverFastGradient::getType()
 	return "FastGradient";
 }
 
-/** Generates the local nodeIndexMap of the solver. This differs from DataModel nodeIndexMap because only Coupler nodes are needed.**/
+/** Generates the local nodeIndexMap of the solver. This differs from GridModel nodeIndexMap because only Coupler nodes are needed.**/
 void SolverFastGradient::generateNodeIndexMap()
 {
 	nodeIndexMap.clear();

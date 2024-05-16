@@ -1,18 +1,18 @@
 #include "SolverNewton.h"
 #include "../../math/VectorTools.h"
-#include "../../model/gridElements/CurrentController.h"
+#include "../../model/gridElements/CurrentSource.h"
 #include "../../math/LSSolver.h"
 #include "../../Config.h"
 
 /** Constructor.
-* @param model the DataModel of the grid.**/
-SolverNewton::SolverNewton(DataModel* model) :Solver(model)
+* @param model the GridModel of the grid.**/
+SolverNewton::SolverNewton(GridModel* model) :Solver(model)
 {
 }
 /** Constructor.
-* @param model the DataModel of the grid.
+* @param model the GridModel of the grid.
 * @param logger the SolverLogging object for logging.**/
-SolverNewton::SolverNewton(DataModel* model, SolverLogging* logger) : Solver(model, logger)
+SolverNewton::SolverNewton(GridModel* model, SolverLogging* logger) : Solver(model, logger)
 {
 }
 /** Overriden method from Solver::calculateVoltages() **/
