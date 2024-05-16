@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{750ae1ad-213d-4203-a82d-f2230ea0f930}</ProjectGuid>
+    <RootNamespace>LineManager</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <PublicIncludeDirectories>
+    </PublicIncludeDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>%LocalAppData%\Programs\Python\Python310\include;</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%LocalAppData%\Programs\Python\Python310\libs;spiceLib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);ngspice.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="control\gridStateSolvers\SpiceWrapper.cpp" />
+    <ClCompile Include="control\JobQueue.cpp" />
+    <ClCompile Include="control\LineManager.cpp" />
+    <ClCompile Include="control\LineManagerBenchmark.cpp" />
+    <ClCompile Include="control\LineManagerHelper.cpp" />
+    <ClCompile Include="control\gridStateSolvers\Solver.cpp" />
+    <ClCompile Include="control\gridStateSolvers\SolverFastGradient.cpp" />
+    <ClCompile Include="control\gridStateSolvers\SolverFLPF.cpp" />
+    <ClCompile Include="control\gridStateSolvers\SolverGradient.cpp" />
+    <ClCompile Include="control\gridStateSolvers\SolverLogging.cpp" />
+    <ClCompile Include="control\gridStateSolvers\SolverNewton.cpp" />
+    <ClCompile Include="control\gridStateSolvers\SolverNodal.cpp" />
+    <ClCompile Include="control\gridStateSolvers\SolverSpice.cpp" />
+    <ClCompile Include="control\gridStateSolvers\SolverCurrentOperatingPoint.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="math\LSSolver.cpp" />
+    <ClCompile Include="math\Matrix.cpp" />
+    <ClCompile Include="math\VectorTools.cpp" />
+    <ClCompile Include="model\gridElements\CableTypes.cpp" />
+    <ClCompile Include="model\gridElements\Coupler.cpp" />
+    <ClCompile Include="model\gridElements\CurrentController.cpp" />
+    <ClCompile Include="model\gridElements\Line.cpp" />
+    <ClCompile Include="model\gridElements\Node.cpp" />
+    <ClCompile Include="model\gridElements\VoltageController.cpp" />
+    <ClCompile Include="model\packets\EP.cpp" />
+    <ClCompile Include="model\packets\EPCurrentRectangular.cpp" />
+    <ClCompile Include="model\packets\EPCurrentTrapeze.cpp" />
+    <ClCompile Include="model\packets\EPPowerRectangular.cpp" />
+    <ClCompile Include="model\packets\EPPowerTrapeze.cpp" />
+    <ClCompile Include="model\packets\Setpoint.cpp" />
+    <ClCompile Include="model\parser\CSVReader.cpp" />
+    <ClCompile Include="model\DataModel.cpp" />
+    <ClCompile Include="model\parser\SimBenchParser.cpp" />
+    <ClCompile Include="view\Visualizer.cpp" />
+    <ClCompile Include="view\VisualizerCurve.cpp" />
+    <ClCompile Include="view\VisualizerGrid.cpp" />
+    <ClCompile Include="view\VisualizerLM.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="control\gridStateSolvers\SpiceWrapper.h" />
+    <ClInclude Include="control\JobQueue.h" />
+    <ClInclude Include="control\LineManager.h" />
+    <ClInclude Include="control\LineManagerBenchmark.h" />
+    <ClInclude Include="control\LineManagerHelper.h" />
+    <ClInclude Include="control\gridStateSolvers\Solver.h" />
+    <ClInclude Include="control\gridStateSolvers\SolverFastGradient.h" />
+    <ClInclude Include="control\gridStateSolvers\SolverFLPF.h" />
+    <ClInclude Include="control\gridStateSolvers\SolverGradient.h" />
+    <ClInclude Include="control\gridStateSolvers\SolverLogging.h" />
+    <ClInclude Include="control\gridStateSolvers\SolverNewton.h" />
+    <ClInclude Include="control\gridStateSolvers\SolverNodal.h" />
+    <ClInclude Include="control\gridStateSolvers\SolverSpice.h" />
+    <ClInclude Include="control\gridStateSolvers\SolverCurrentOperatingPoint.h" />
+    <ClInclude Include="math\LSSolver.h" />
+    <ClInclude Include="math\Matrix.h" />
+    <ClInclude Include="math\VectorTools.h" />
+    <ClInclude Include="model\gridElements\CableTypes.h" />
+    <ClInclude Include="model\gridElements\Coupler.h" />
+    <ClInclude Include="model\gridElements\CurrentController.h" />
+    <ClInclude Include="model\gridElements\Line.h" />
+    <ClInclude Include="model\gridElements\Node.h" />
+    <ClInclude Include="model\gridElements\VoltageController.h" />
+    <ClInclude Include="model\packets\EP.h" />
+    <ClInclude Include="model\packets\EPCurrentTrapeze.h" />
+    <ClInclude Include="model\packets\EPPowerRectangular.h" />
+    <ClInclude Include="model\packets\EPPowerTrapeze.h" />
+    <ClInclude Include="model\packets\EPCurrentRectangular.h" />
+    <ClInclude Include="model\packets\Setpoint.h" />
+    <ClInclude Include="model\parser\CSVReader.h" />
+    <ClInclude Include="model\DataModel.h" />
+    <ClInclude Include="model\parser\SimBenchParser.h" />
+    <ClInclude Include="view\Visualizer.h" />
+    <ClInclude Include="view\VisualizerCurve.h" />
+    <ClInclude Include="view\VisualizerGrid.h" />
+    <ClInclude Include="view\VisualizerLM.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
